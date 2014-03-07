@@ -1,0 +1,2 @@
+== Pendidikan API
+The Pendidikan API is a service that provides information about the Indonesian elections.
