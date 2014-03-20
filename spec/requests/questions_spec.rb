@@ -15,7 +15,7 @@ describe Pertanyaan::API do
       get "/api/pertanyaan"
       response.status.should == 200
       questions = Question.find_all
-      response.body.should == 
+      response.body.should ==
         {
         results: {
           count: Question.count,
@@ -29,16 +29,16 @@ describe Pertanyaan::API do
       get "/api/pertanyaan?limit=1"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
-      ress["results"]["total"].should == 1
+      ress["results"]["count"].should == 1
+      ress["results"]["total"].should == 2
     end
 
     it "offset questions should works" do
       get "/api/pertanyaan?limit=10&offset=1"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
-      ress["results"]["total"].should == 1
+      ress["results"]["count"].should == 1
+      ress["results"]["total"].should == 2
       ress["results"]["questions"][0]['id'].should == "002"
     end
 
@@ -46,7 +46,7 @@ describe Pertanyaan::API do
       get "/api/pertanyaan?tags=TPS"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
+      ress["results"]["count"].should == 1
       ress["results"]["total"].should == 1
     end
 
@@ -54,10 +54,10 @@ describe Pertanyaan::API do
       get "/api/pertanyaan?tags=whatever"
       ress = JSON.parse(response.body)
       response.status.should == 200
-      ress["results"]["count"].should == 2
+      ress["results"]["count"].should == 0
       ress["results"]["total"].should == 0
     end
-    
+
   end
 
   describe "GET /api/pertanyaan/001" do
@@ -68,11 +68,11 @@ describe Pertanyaan::API do
         results: {
           count: 1,
           total: 1,
-          questions: {:id=>'001',
+          questions: [{:id=>'001',
             :question => 'Dimana sih pemilu dilaksanain?',
             :answer => 'TPS',
             :tags => ["TPS"]
-          }
+          }]
         }
       }.to_json
     end

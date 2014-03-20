@@ -9,8 +9,8 @@ module Pertanyaan
         questions = Question.find_all(params)
         {
           results: {
-            count: Question.count,
-            total: questions.count,
+            count: questions.count,
+ 	          total: Question.get_total(params),
             questions: questions
           }
         }
@@ -28,7 +28,7 @@ module Pertanyaan
             results: {
               count: (question_detail) ? 1 : 0,
               total: (question_detail) ? 1 : 0,
-              questions: question_detail
+              questions: [question_detail]
             }
           }
         end

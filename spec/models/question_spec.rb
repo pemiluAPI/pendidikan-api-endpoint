@@ -20,6 +20,18 @@ describe Question do
      Question.find_all.count == 2
   end
 
+  it "should return nil if no params tags" do
+     Question.send(:conditions).should be_nil
+  end
+
+  it "should return array if isset params tags" do
+     Question.send(:conditions, {:tags => "test"}).should == ["tags.tag = ?", "test"]
+  end
+
+  it "should return array if params tags is multiple" do
+     Question.send(:conditions, {:tags => "test, test2"}).should == ["tags.tag in (?)", ["test", " test2"]]
+  end
+
   def question_details
     {
       id: "001",
