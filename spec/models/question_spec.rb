@@ -20,6 +20,15 @@ describe Question do
      Question.find_all.count == 2
   end
 
+  it "should return array" do
+     Question.find_all.class.should == Array
+  end
+
+  it "should return interger for total" do
+     Question.get_total.class.should == Fixnum
+  end
+
+
   it "should return nil if no params tags" do
      Question.send(:conditions).should be_nil
   end
